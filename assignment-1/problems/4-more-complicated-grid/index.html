@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complicated-Grid</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            width: 1200px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .red-div {
+            display: grid;
+            background-color: red;
+           grid-template-rows: minmax(0, 1fr) minmax(0, 2fr); 
+        }
+
+        .blue-div {
+            display: grid;
+            background-color: blue;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding-top: 10px;
+        }
+        .horizontally-center{
+            margin: 0 auto;
+        }
+        .vertically-center{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="red-div">
+            <div class="horizontally-center"><h1>Left</h1></div>
+            <div class="vertically-center">
+            <div>
+                <h3>text text text text text text text text text text text text text</h3>
+            </div>
+        </div>
+        </div>
+        <div class="blue-div">
+            <div><h2>col 1</h2></div>
+            <div><h2>col 2</h2></div>
+            <div><h2>col 3</h2></div>
+            <div><h2>col 4</h2></div>
+            <div><h2>col 5</h2></div>
+            <div><h2>col 6</h2></div>
+            <div><h2>col 7</h2></div>
+            <div><h2>col 8</h2></div>
+            <div><h2>col 9</h2></div>
+        </div>
+    </div>
+</body>
+
+</html>

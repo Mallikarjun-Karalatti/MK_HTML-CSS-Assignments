@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Pokémon Card Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Pokémon Card Generator</h1>
+
+<form id="pokemonForm">
+  <label for="numCards">Number of Cards:</label>
+  <input type="number" id="numCards" min="1" max="10" required>
+
+  <label for="category">Category:</label>
+  <select id="category">
+    <option value="fire">Fire</option>
+    <option value="water">Water</option>
+    <option value="grass">Grass</option>
+    <option value="electric">Electric</option>
+  </select>
+
+  <label for="generation">Generation:</label>
+  <select id="generation">
+    <option value="1">Generation I</option>
+    <option value="2">Generation II</option>
+    <option value="3">Generation III</option>
+    <option value="4">Generation IV</option>
+    <option value="5">Generation V</option>
+    <option value="6">Generation VI</option>
+    <option value="7">Generation VII</option>
+    <option value="8">Generation VIII</option>
+  </select>
+
+  <button type="submit">Generate</button>
+</form>
+
+<div id="cards" class="cards-container"></div>
+<script src="script.js"></script>
+</body>
+</html>
