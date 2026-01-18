@@ -70,5 +70,28 @@ button[data-color="white"] {
   cursor: pointer;
 }
 
-/* existing styles stay as-is */
+.custom-color {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.custom-color input {
+  width: 220px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 2px solid #4d4d4d;
+  font-size: 14px;
+}
+
+.custom-color button {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 2px solid #4d4d4d;
+  cursor: pointer;
+  background-color: #e5e5e5;
+  font-weight: bold;
+}
+
 
