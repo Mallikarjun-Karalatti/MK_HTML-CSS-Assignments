@@ -111,3 +111,27 @@ form button:hover {
   color: #3B4CCA;
   margin-left: 30px;
 }
+
+body.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body.centered #form-section h1 {
+  font-size: 3rem;
+}
+
+body.centered #form-section form {
+  width: 360px;
+  padding: 30px;
+}
+
+body:not(.centered) {
+  align-items: flex-start;
+}
+
+.cards-container {
+  margin-top: 30px;
+}
