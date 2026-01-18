@@ -68,3 +68,12 @@ document.getElementById('pokemonForm').addEventListener('submit', async (e) => {
     cardsDiv.innerHTML = '<p>Error fetching Pokémon data.</p>';
   }
 });
+
+
+// After appending each card
+card.style.opacity = 0;
+cardsDiv.appendChild(card);
+setTimeout(() => {
+  card.style.transition = "opacity 0.5s ease-in";
+  card.style.opacity = 1;
+}, 50);
