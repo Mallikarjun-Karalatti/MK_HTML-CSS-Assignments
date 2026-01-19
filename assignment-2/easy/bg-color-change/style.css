@@ -1,15 +1,28 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light;
+}
+
 body{
     background-color: rgb(255, 255, 255);
     transition: background-color 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
-    padding: 30px;
+    min-height: 100vh;
+    padding: 100px;
+    margin: 0;
 }
 
-.btn-container{
-  margin-bottom: 100px;
+.btn-set{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 button {
@@ -21,36 +34,43 @@ button {
 }
 
 button[data-color="red"] {
+  --btn-color: red;
   background-color: red;
   color: white;
 }
 
 button[data-color="yellow"] {
+  --btn-color: yellow;
   background-color: yellow;
   color: black;
 }
 
 button[data-color="black"] {
+  --btn-color: black;
   background-color: black;
   color: white;
 }
 
 button[data-color="purple"] {
+  --btn-color: purple;
   background-color: purple;
   color: white;
 }
 
 button[data-color="green"] {
+  --btn-color: green;
   background-color: green;
   color: white;
 }
 
 button[data-color="blue"] {
+  --btn-color: blue;
   background-color: blue;
   color: white;
 }
 
 button[data-color="white"] {
+  --btn-color: white;
   background-color: white;
   color: black;
 }
@@ -75,6 +95,7 @@ button[data-color="white"] {
   display: flex;
   gap: 10px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .custom-color input {
@@ -94,4 +115,24 @@ button[data-color="white"] {
   font-weight: bold;
 }
 
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px var(--btn-color),
+              0 0 24px color-mix(in srgb, var(--btn-color) 60%, transparent);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 6px var(--btn-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: white;
+  }
+}
 

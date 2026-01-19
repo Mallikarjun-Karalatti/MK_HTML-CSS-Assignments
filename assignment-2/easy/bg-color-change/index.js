@@ -56,3 +56,4 @@ function isValidColor(color) {
 
   return match.slice(1).every(num => Number(num) >= 0 && Number(num) <= 255);
 }
+
