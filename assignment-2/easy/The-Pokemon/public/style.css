@@ -135,3 +135,57 @@ body:not(.centered) {
 .cards-container {
   margin-top: 30px;
 }
+
+.card img {
+  transition: transform 0.3s ease;
+}
+.card img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.card img {
+  animation: float 3s ease-in-out infinite;
+}
+
+
+.flip-container {
+  perspective: 1000px;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 15px;
+  cursor: pointer;
+}
+
+.flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.front img, .back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
