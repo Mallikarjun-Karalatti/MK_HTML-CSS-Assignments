@@ -13,7 +13,14 @@ export function createPokemonCard(pokeData) {
           <img src="${officialArt}" alt="${pokeData.name}" class="official-art">
         </div>
         <div class="back">
-          ${animatedSprite ? `<img src="${animatedSprite}" alt="${pokeData.name}" class="animated-sprite">` : ''}
+          ${
+            animatedSprite
+              ? `<img src="${animatedSprite}" alt="${pokeData.name}" class="animated-sprite">`
+              : `<div class="fallback-animation">
+                   <div class="pokeball"></div>
+                   <p class="fallback-text">No animated sprite<br>available</p>
+                 </div>`
+          }
         </div>
       </div>
     </div>
@@ -27,7 +34,6 @@ export function createPokemonCard(pokeData) {
     </div>
   `;
 
-  // Toggle flip on click
   card.querySelector('.flip-container').addEventListener('click', () => {
     card.querySelector('.flipper').classList.toggle('flipped');
   });

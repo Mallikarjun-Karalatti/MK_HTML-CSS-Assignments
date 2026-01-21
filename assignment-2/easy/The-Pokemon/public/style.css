@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 20px;
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* Heading */
@@ -187,5 +187,61 @@ body:not(.centered) {
 
 .back {
   transform: rotateY(180deg);
+}
+
+@media (max-width: 480px) {
+  body.centered #form-section form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .stats {
+    width: 90%;
+  }
+}
+
+
+.fallback-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #FFCB05;
+}
+
+.fallback-text {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #FFCB05;
+  text-shadow: 0 0 5px #3B4CCA;
+}
+
+.pokeball {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #050505;
+  border-radius: 50%;
+  position: relative;
+  background: linear-gradient(to bottom, #FFCB05 50%, #fff 50%);
+  animation: spin 2s linear infinite;
+}
+
+.pokeball::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 3px solid #050505;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 

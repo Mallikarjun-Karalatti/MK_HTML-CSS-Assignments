@@ -1,6 +1,11 @@
-// main.js
-import { createPokemonCard } from './card.js';
+// index.js
+import {
+  fetchGenerationPokemon,
+  fetchTypePokemon,
+  fetchPokemon
+} from './api.js';
 
+import { createPokemonCard } from './card.js';
 
 const form = document.getElementById('pokemonForm');
 const cardsDiv = document.getElementById('cards');
@@ -8,9 +13,7 @@ const cardsDiv = document.getElementById('cards');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Switch layout state
   document.body.classList.remove('centered');
-
   cardsDiv.innerHTML = '';
 
   const numCards = +document.getElementById('numCards').value;
@@ -18,26 +21,11 @@ form.addEventListener('submit', async (e) => {
   const generation = document.getElementById('generation').value;
 
   try {
-    const normalize = name =>
-      name.toLowerCase().replace(/[^a-z0-9-]/g, '');
-
-    // Fetch generation Pokémon
-    const genRes = await fetch(
-      `https://pokeapi.co/api/v2/generation/${generation}`
-    );
-    const genData = await genRes.json();
-    const genPokemon = genData.pokemon_species.map(p =>
-      normalize(p.name)
-    );
-
-    // Fetch type Pokémon
-    const typeRes = await fetch(
-      `https://pokeapi.co/api/v2/type/${category}`
-    );
-    const typeData = await typeRes.json();
-    const typePokemon = typeData.pokemon.map(p =>
-      normalize(p.pokemon.name)
-    );
+    // Fetch generation + type Pokémon in parallel
+    const [genPokemon, typePokemon] = await Promise.all([
+      fetchGenerationPokemon(generation),
+      fetchTypePokemon(category)
+    ]);
 
     // Intersection
     const filtered = genPokemon.filter(name =>
@@ -54,17 +42,20 @@ form.addEventListener('submit', async (e) => {
       .sort(() => 0.5 - Math.random())
       .slice(0, numCards);
 
-    for (const name of selected) {
-      const pokeRes = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${name}`
-      );
-      const pokeData = await pokeRes.json();
+    // Fetch Pokémon details in parallel
+    const pokemonData = await Promise.all(
+      selected.map(fetchPokemon)
+    );
 
-      const card = createPokemonCard(pokeData);
-      cardsDiv.appendChild(card);
-    }
+    pokemonData.forEach(pokeData => {
+      cardsDiv.appendChild(
+        createPokemonCard(pokeData)
+      );
+    });
+
   } catch (err) {
     console.error(err);
-    cardsDiv.innerHTML = '<p>Error fetching Pokémon data.</p>';
+    cardsDiv.innerHTML =
+      '<p>Error fetching Pokémon data.</p>';
   }
 });
