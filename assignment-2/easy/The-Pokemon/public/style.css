@@ -200,7 +200,6 @@ body:not(.centered) {
   }
 }
 
-
 .fallback-animation {
   display: flex;
   flex-direction: column;
@@ -243,5 +242,27 @@ body:not(.centered) {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.message {
+  text-align: center;
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  max-width: 600px;
+}
+
+.message.info {
+  background: rgba(59, 76, 202, 0.2);
+  border: 2px solid #3B4CCA;
+  color: #FFCB05;
+}
+
+.message.error {
+  background: rgba(255, 50, 50, 0.2);
+  border: 2px solid #ff3232;
+  color: #ff6b6b;
 }
 

@@ -15,26 +15,25 @@ form.addEventListener('submit', async (e) => {
 
   document.body.classList.remove('centered');
   cardsDiv.innerHTML = '';
+  document.getElementById('message').innerHTML = ''; // clear old message
 
   const numCards = +document.getElementById('numCards').value;
   const category = document.getElementById('category').value;
   const generation = document.getElementById('generation').value;
 
   try {
-    // Fetch generation + type Pokémon in parallel
     const [genPokemon, typePokemon] = await Promise.all([
       fetchGenerationPokemon(generation),
       fetchTypePokemon(category)
     ]);
 
-    // Intersection
     const filtered = genPokemon.filter(name =>
       typePokemon.includes(name)
     );
 
     if (filtered.length === 0) {
-      cardsDiv.innerHTML =
-        '<p>No Pokémon found for this selection.</p>';
+      document.getElementById('message').innerHTML =
+        `<div class="message error">No Pokémon found for Generation ${generation} of ${category} type.</div>`;
       return;
     }
 
@@ -42,20 +41,25 @@ form.addEventListener('submit', async (e) => {
       .sort(() => 0.5 - Math.random())
       .slice(0, numCards);
 
-    // Fetch Pokémon details in parallel
+    // Show info if fewer than requested
+    if (selected.length < numCards) {
+      document.getElementById('message').innerHTML =
+        `<div class="message info">
+           Only ${selected.length} cards available for Generation ${generation} of ${category} type.
+         </div>`;
+    }
+
     const pokemonData = await Promise.all(
       selected.map(fetchPokemon)
     );
 
     pokemonData.forEach(pokeData => {
-      cardsDiv.appendChild(
-        createPokemonCard(pokeData)
-      );
+      cardsDiv.appendChild(createPokemonCard(pokeData));
     });
 
   } catch (err) {
     console.error(err);
-    cardsDiv.innerHTML =
-      '<p>Error fetching Pokémon data.</p>';
+    document.getElementById('message').innerHTML =
+      '<div class="message error">Error fetching Pokémon data.</div>';
   }
 });
