@@ -1,7 +1,16 @@
 /* Global styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #050505; /* near black */
+  background: #050505;
+  /* near black */
   color: #fff;
   margin: 0;
   padding: 20px;
@@ -11,7 +20,8 @@ body {
 
 /* Heading */
 h1 {
-  color: #FFCB05; /* Pokémon yellow */
+  color: #FFCB05;
+  /* Pokémon yellow */
   font-size: 2.5rem;
   margin-bottom: 20px;
   text-shadow: 2px 2px #3B4CCA;
@@ -19,11 +29,12 @@ h1 {
 
 /* Form styling */
 form {
-  background: #4a5ad4; /* blue */
+  background: #4a5ad4;
+  /* blue */
   padding: 20px;
   border-radius: 12px;
   display: inline-block;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   margin-bottom: 30px;
 }
 
@@ -34,7 +45,9 @@ form label {
   color: #FFCB05;
 }
 
-form input, form select, form button {
+form input,
+form select,
+form button {
   width: 80%;
   padding: 10px;
   margin-bottom: 15px;
@@ -43,7 +56,8 @@ form input, form select, form button {
   font-size: 1rem;
 }
 
-form input, form select {
+form input,
+form select {
   background: #fff;
   color: #050505;
 }
@@ -62,20 +76,19 @@ form button:hover {
 
 /* Cards container */
 .cards-container {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
   padding: 10px;
+  margin-top: 30px;
 }
 
 /* Individual card */
 .card {
-    min-width: 220px;
-    background: #1a1a1a;
-    border: 2px solid #3B4CCA;
+  min-width: 220px;
+  background: #1a1a1a;
+  border: 2px solid #3B4CCA;
   border-radius: 12px;
   padding: 15px;
   text-align: center;
@@ -92,6 +105,12 @@ form button:hover {
   width: 120px;
   height: 120px;
   margin: 10px 0;
+  transition: transform 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.card img:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .card h3 {
@@ -100,8 +119,8 @@ form button:hover {
   color: #FFCB05;
 }
 
-.stats { 
-    width: 60%;
+.stats {
+  width: 60%;
   text-align: left;
   font-size: 0.9rem;
   margin: 10px auto;
@@ -132,25 +151,6 @@ body:not(.centered) {
   align-items: flex-start;
 }
 
-.cards-container {
-  margin-top: 30px;
-}
-
-.card img {
-  transition: transform 0.3s ease;
-}
-.card img:hover {
-  transform: scale(1.1) rotate(5deg);
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-.card img {
-  animation: float 3s ease-in-out infinite;
-}
-
 
 .flip-container {
   perspective: 1000px;
@@ -172,14 +172,16 @@ body:not(.centered) {
   transform: rotateY(180deg);
 }
 
-.front, .back {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
 }
 
-.front img, .back img {
+.front img,
+.back img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -189,16 +191,6 @@ body:not(.centered) {
   transform: rotateY(180deg);
 }
 
-@media (max-width: 480px) {
-  body.centered #form-section form {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .stats {
-    width: 90%;
-  }
-}
 
 .fallback-animation {
   display: flex;
@@ -239,11 +231,6 @@ body:not(.centered) {
   transform: translate(-50%, -50%);
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 .message {
   text-align: center;
   padding: 15px;
@@ -266,3 +253,54 @@ body:not(.centered) {
   color: #ff6b6b;
 }
 
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  body.centered #form-section form {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .stats {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.card,
+.card img {
+  will-change: transform;
+}
+
+form input:focus,
+form select:focus,
+form button:focus {
+  outline: 2px solid #FFCB05;
+  outline-offset: 2px;
+}
